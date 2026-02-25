@@ -75,7 +75,7 @@ export default function ArticleDetailPage() {
   const { data: hasUpvotedArticle, refetch: refetchHasUpvotedArticle } = useReadContract({
     abi: WRAPUP_ABI,
     address: currentContractAddress,
-    functionName: 'hasUserUpvotedArticle',
+    functionName: 'hasUpvotedArticle',
     args: [address, article?.articleId],
     enabled: isConnected && !!article?.articleId,
   });

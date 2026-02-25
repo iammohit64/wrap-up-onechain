@@ -46,7 +46,7 @@ export default function Navbar() {
   const { data: nameData, refetch: refetchName } = useReadContract({
     abi: WRAPUP_ABI,
     address: currentContractAddress,
-    functionName: 'getDisplayName',
+    functionName: 'displayNames',
     args: [address],
     enabled: isConnected && !!address,
   });

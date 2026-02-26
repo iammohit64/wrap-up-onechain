@@ -101,6 +101,7 @@ export default function ResearchReportPage() {
     prepareResearchCommentForChain,
     markResearchCommentOnChainDB,
     syncResearchUpvotesDB,
+    deleteResearchFromDB
   } = useArticleStore();
 
   const fetchResearch = async () => {
@@ -201,7 +202,7 @@ export default function ResearchReportPage() {
           }
         } catch {}
       }
-    },
+    }
   });
 
   const callContract = (writeFn, config, toastId) => {
@@ -262,6 +263,11 @@ export default function ResearchReportPage() {
     } catch (err) {
       toast.error(err.message || "Publish failed", { id: tid });
       setPublishStep(-1);
+      if (research?.id) {
+        deleteResearchFromDB(research.id);
+        toast.error("Publish failed. Report deleted for consistency.");
+        navigate('/'); // <--- ADD THIS: Redirects user away from deleted page
+      }
     }
   };
 
@@ -319,6 +325,11 @@ export default function ResearchReportPage() {
         id: "pubToast",
       });
       setPublishStep(-1);
+      if (research?.id) {
+        deleteResearchFromDB(research.id);
+        toast.error("Transaction failed. Report deleted for consistency.");
+        navigate('/'); // <--- ADD THIS
+      }
     }
 
     if (isPublishWriteError) {
@@ -326,6 +337,11 @@ export default function ResearchReportPage() {
         id: "pubToast",
       });
       setPublishStep(-1);
+      if (research?.id) {
+        deleteResearchFromDB(research.id);
+        toast.error("Wallet rejected. Report deleted for consistency.");
+        navigate('/'); // <--- ADD THIS
+      }
     }
   }, [
     isPublishing,
@@ -571,7 +587,7 @@ export default function ResearchReportPage() {
       <Navbar />
 
       <main className="container mx-auto px-4 py-8 max-w-7xl">
-        {/* Header */}
+        {/* Header / Heading */}
         <div className="mb-8">
           <button
             onClick={() => navigate("/")}
@@ -675,39 +691,7 @@ export default function ResearchReportPage() {
           </div>
         </section>
 
-        {/* Upvote section — only when on-chain */}
-        {research.onChain && (
-          <section className="bg-[#121214] border border-[#27272a] rounded-xl p-6 mb-8">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white mb-1">{research.upvotes}</div>
-                  <div className="text-xs text-zinc-500 uppercase">Upvotes</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-white mb-1">
-                    {research.comments?.length || 0}
-                  </div>
-                  <div className="text-xs text-zinc-500 uppercase">Comments</div>
-                </div>
-              </div>
-              <button
-                onClick={handleUpvoteResearch}
-                disabled={!isConnected || hasUpvotedResearchLocal || isVoting}
-                className={`px-6 py-3 rounded-lg font-bold flex items-center gap-2 transition-colors ${
-                  !isConnected || hasUpvotedResearchLocal || isVoting
-                    ? "bg-[#27272a] text-zinc-600 cursor-not-allowed"
-                    : "bg-[#10b981] text-black hover:bg-[#059669]"
-                }`}
-              >
-                <ThumbsUp className="w-5 h-5" />
-                {isVoting ? "Voting..." : hasUpvotedResearchLocal ? "Upvoted" : "Upvote Research"}
-              </button>
-            </div>
-          </section>
-        )}
-
-        {/* Visualizations */}
+        {/* Visualizations (All the graphs) */}
         <section className="grid lg:grid-cols-2 gap-6 mb-8">
           <div className="bg-[#121214] border border-[#27272a] rounded-xl p-6">
             <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
@@ -771,53 +755,6 @@ export default function ResearchReportPage() {
             </ResponsiveContainer>
           </div>
         </section>
-
-        {/* Comments — only when on-chain */}
-        {research.onChain && (
-          <section className="bg-[#121214] border border-[#27272a] rounded-xl p-8 mb-8">
-            <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
-              <MessageSquare className="w-6 h-6 text-[#10b981]" />
-              Discussion ({research.comments?.length || 0})
-            </h2>
-
-            {isConnected ? (
-              <form onSubmit={handleComment} className="mb-12 flex gap-4">
-                <div className="w-10 h-10 bg-[#27272a] rounded-lg border border-[#3f3f46] flex-shrink-0" />
-                <div className="flex-grow">
-                  <textarea
-                    className="w-full bg-transparent border-b border-[#27272a] p-2 text-white placeholder-zinc-600 focus:outline-none focus:border-[#10b981] transition-colors resize-none"
-                    rows={2}
-                    value={commentText}
-                    onChange={(e) => setCommentText(e.target.value)}
-                    placeholder="Add to the discussion..."
-                    disabled={isCommenting}
-                  />
-                  <div className="flex justify-end mt-2">
-                    <button
-                      type="submit"
-                      disabled={isCommenting || !commentText.trim()}
-                      className="bg-white text-black px-6 py-2 rounded font-bold text-sm uppercase hover:bg-zinc-200 disabled:opacity-50"
-                    >
-                      {isCommenting ? "Posting..." : "Comment"}
-                    </button>
-                  </div>
-                </div>
-              </form>
-            ) : (
-              <div className="bg-[#18181b] p-6 text-center border border-[#27272a] rounded-lg mb-8">
-                <p className="text-zinc-500 text-sm">Connect wallet to join the conversation.</p>
-              </div>
-            )}
-
-            <div className="space-y-2">
-              {research.comments?.length > 0 ? (
-                research.comments.map((c) => renderComment(c))
-              ) : (
-                <p className="text-zinc-600 italic">No comments yet.</p>
-              )}
-            </div>
-          </section>
-        )}
 
         {/* Comparative Analysis */}
         <section className="bg-[#121214] border border-[#27272a] rounded-xl p-8 mb-8">
@@ -1004,7 +941,86 @@ export default function ResearchReportPage() {
           </section>
         )}
 
-        {/* Detailed Sources */}
+        {/* Upvote section — only when on-chain */}
+        {research.onChain && (
+          <section className="bg-[#121214] border border-[#27272a] rounded-xl p-6 mb-8">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-6">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-white mb-1">{research.upvotes}</div>
+                  <div className="text-xs text-zinc-500 uppercase">Upvotes</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-white mb-1">
+                    {research.comments?.length || 0}
+                  </div>
+                  <div className="text-xs text-zinc-500 uppercase">Comments</div>
+                </div>
+              </div>
+              <button
+                onClick={handleUpvoteResearch}
+                disabled={!isConnected || hasUpvotedResearchLocal || isVoting}
+                className={`px-6 py-3 rounded-lg font-bold flex items-center gap-2 transition-colors ${
+                  !isConnected || hasUpvotedResearchLocal || isVoting
+                    ? "bg-[#27272a] text-zinc-600 cursor-not-allowed"
+                    : "bg-[#10b981] text-black hover:bg-[#059669]"
+                }`}
+              >
+                <ThumbsUp className="w-5 h-5" />
+                {isVoting ? "Voting..." : hasUpvotedResearchLocal ? "Upvoted" : "Upvote Research"}
+              </button>
+            </div>
+          </section>
+        )}
+
+        {/* Comments and Discussions — only when on-chain */}
+        {research.onChain && (
+          <section className="bg-[#121214] border border-[#27272a] rounded-xl p-8 mb-8">
+            <h2 className="text-2xl font-bold mb-8 flex items-center gap-2">
+              <MessageSquare className="w-6 h-6 text-[#10b981]" />
+              Discussion ({research.comments?.length || 0})
+            </h2>
+
+            {isConnected ? (
+              <form onSubmit={handleComment} className="mb-12 flex gap-4">
+                <div className="w-10 h-10 bg-[#27272a] rounded-lg border border-[#3f3f46] flex-shrink-0" />
+                <div className="flex-grow">
+                  <textarea
+                    className="w-full bg-transparent border-b border-[#27272a] p-2 text-white placeholder-zinc-600 focus:outline-none focus:border-[#10b981] transition-colors resize-none"
+                    rows={2}
+                    value={commentText}
+                    onChange={(e) => setCommentText(e.target.value)}
+                    placeholder="Add to the discussion..."
+                    disabled={isCommenting}
+                  />
+                  <div className="flex justify-end mt-2">
+                    <button
+                      type="submit"
+                      disabled={isCommenting || !commentText.trim()}
+                      className="bg-white text-black px-6 py-2 rounded font-bold text-sm uppercase hover:bg-zinc-200 disabled:opacity-50"
+                    >
+                      {isCommenting ? "Posting..." : "Comment"}
+                    </button>
+                  </div>
+                </div>
+              </form>
+            ) : (
+              <div className="bg-[#18181b] p-6 text-center border border-[#27272a] rounded-lg mb-8">
+                <p className="text-zinc-500 text-sm">Connect wallet to join the conversation.</p>
+              </div>
+            )}
+
+            <div className="space-y-2">
+              {research.comments?.length > 0 ? (
+                research.comments.map((c) => renderComment(c))
+              ) : (
+                <p className="text-zinc-600 italic">No comments yet.</p>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* Source Details */}
         <section className="bg-[#121214] border border-[#27272a] rounded-xl p-8">
           <h2 className="text-2xl font-bold mb-6">Source Details</h2>
           <div className="space-y-4">

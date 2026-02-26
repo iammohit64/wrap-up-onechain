@@ -90,7 +90,7 @@ export default function LegacyLandingPage() {
   const { isConnected, address } = useAccount();
   const chainId = useChainId();
   const { switchChain } = useSwitchChain();
-  const { markArticleOnChainDB } = useArticleStore();
+  const { markArticleOnChainDB, deleteArticleFromDB } = useArticleStore();
 
   const currentContractAddress =
     CONTRACT_ADDRESSES[chainId] || CONTRACT_ADDRESSES[421614];
@@ -228,7 +228,12 @@ export default function LegacyLandingPage() {
     } catch (err) {
       setError(err.message);
       toast.error(err.message || "Curation failed");
-      setStepIndex(-1);
+      if (savedArticle?.id) {
+        deleteArticleFromDB(savedArticle.id);
+        setSavedArticle(null);
+      }
+      
+      setStepIndex(-1); // Resets the button so they can try again
       setLoading(false);
     }
   };
@@ -291,14 +296,19 @@ export default function LegacyLandingPage() {
       }
     }
 
-    if (isTxError) {
-      toast.error(txError?.shortMessage || "Transaction failed", {
-        id: "mintToast",
-      });
-      setStepIndex(1); // back to after IPFS
+    if (isTxError || writeError) {
+      toast.error("Transaction failed or rejected.", { id: "mintToast" });
+      
+      // Cleanup the orphaned DB record
+      if (savedArticle?.id) {
+         deleteArticleFromDB(savedArticle.id);
+         setSavedArticle(null);
+      }
+      
+      setStepIndex(-1); // Resets the button to "Curate & Mint"
       setLoading(false);
     }
-  }, [isPending, isConfirming, isConfirmed, isTxError, receipt]);
+  }, [isPending, isConfirming, isConfirmed, isTxError, receipt, writeError, txError, savedArticle, ipfsHash, address, navigate, markArticleOnChainDB, deleteArticleFromDB]);
 
   const handleReset = () => {
     setUrl("");

@@ -18,6 +18,7 @@ import {
   Star, AlertCircle, CheckCircle, XCircle, TrendingUp, BookOpen,
   ArrowRight, Hexagon, BarChart3, Circle,
 } from "lucide-react";
+import { useArticleStore } from "../stores/articleStore";
 
 const API_BASE = "/api";
 
@@ -110,6 +111,8 @@ export default function ComparatorPage() {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
   const { switchChain } = useSwitchChain();
+
+  const { deleteComparisonFromDB } = useArticleStore();
 
   const currentContractAddress =
     CONTRACT_ADDRESSES[chainId] || CONTRACT_ADDRESSES[421614];
@@ -232,6 +235,13 @@ export default function ComparatorPage() {
     } catch (err) {
       toast.error(err.message || "Publish failed", { id: tid });
       setPublishStep(-1);
+
+      if (comparison?.id) {
+        console.log("Triggering cleanup for failed publication...");
+        deleteComparisonFromDB(comparison.id);
+        setComparison(null); // <--- ADD THIS: Resets the UI
+        toast.error("Database record cleaned up. Please run comparison again.");
+      }
     }
   };
 
@@ -295,11 +305,19 @@ export default function ComparatorPage() {
     if (isPublishTxError) {
       toast.error(publishTxError?.shortMessage || "Transaction failed", { id: "compPubToast" });
       setPublishStep(-1);
+      if (comparison?.id) {
+        deleteComparisonFromDB(comparison.id);
+        setComparison(null); // <--- ADD THIS
+      }
     }
 
     if (isPublishWriteError) {
       toast.error(publishWriteError?.shortMessage || "Wallet rejected", { id: "compPubToast" });
       setPublishStep(-1);
+      if (comparison?.id) {
+        deleteComparisonFromDB(comparison.id);
+        setComparison(null); // <--- ADD THIS
+      }
     }
   }, [
     isPublishing, isPublishConfirming, isPublishConfirmed,

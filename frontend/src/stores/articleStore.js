@@ -269,5 +269,32 @@ export const useArticleStore = create((set, get) => ({
       console.error('DB sync research comment upvotes error:', error);
       throw new Error(error.message || 'Failed to sync research comment upvotes in DB');
     }
-  }
+  },
+
+  deleteArticleFromDB: async (id) => {
+    try {
+      await axios.delete(`${API_BASE}/articles/${id}`);
+      console.log('🗑️ Cleaned up off-chain article:', id);
+    } catch (error) {
+      console.error('Failed to cleanup article:', error);
+    }
+  },
+
+  deleteComparisonFromDB: async (id) => {
+    try {
+      await axios.delete(`${API_BASE}/comparisons/${id}`);
+      console.log('🗑️ Cleaned up off-chain comparison:', id);
+    } catch (error) {
+      console.error('Failed to cleanup comparison:', error);
+    }
+  },
+
+  deleteResearchFromDB: async (id) => {
+    try {
+      await axios.delete(`${API_BASE}/research/${id}`);
+      console.log('🗑️ Cleaned up off-chain research:', id);
+    } catch (error) {
+      console.error('Failed to cleanup research:', error);
+    }
+  },
 }));

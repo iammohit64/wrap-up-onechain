@@ -1,173 +1,273 @@
-# 🌐 Wrap-Up Evolved: Study Differently
-**A Decentralized Web3 AI Research & News Curation Platform — Built on Polkadot**
+# 🌐 Wrap-Up: Study Smartly
 
-[![Live Demo](https://img.shields.io/badge/Live%20App-wrap--up--polkadot.vercel.app-10b981?style=for-the-badge&logo=vercel)](https://wrap-up-polkadot.vercel.app/)
-[![Demo Video](https://img.shields.io/badge/Watch-Demo%20Video-FF0000?style=for-the-badge&logo=youtube)](https://youtu.be/gcb1c2ZSsmw)
-[![Polkadot](https://img.shields.io/badge/Chain-Polkadot%20Hub%20Testnet-E6007A?style=for-the-badge&logo=polkadot)](https://polkadot.network)
+**A Decentralized Web3 AI Research & News Curation Platform, Built Natively on OneChain**
 
----
+[![Live App](https://img.shields.io/badge/Visit-Live%20App-00C853?style=for-the-badge&logo=vercel&logoColor=white)](https://wrap-up-onechain.vercel.app/)
+[![Demo Video](https://img.shields.io/badge/Watch-Demo%20Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/PEnP38zMSzw)
+[![OneChain Docs](https://img.shields.io/badge/Docs-OneChain-6C47FF?style=for-the-badge)](https://docs.onelabs.cc/)
 
-## 📖 Full Project Description
-
-### What is Wrap-Up Evolved?
-
-Wrap-Up Evolved is a fully-fledged decentralized social platform engineered for the modern Web3 researcher. We position it as a tool to **"Study Differently."** Instead of drowning in noisy Twitter feeds, scattered Discord servers, or financially motivated shilling, Wrap-Up delivers a **gamified, decentralized ecosystem** where high-quality articles and AI-generated research reports are curated, discussed, and permanently recorded on-chain via **Polkadot Hub Testnet**.
-
-The platform merges the speed and intelligence of AI with the trust and transparency of blockchain — creating a new category of tool: a **verifiable, community-driven knowledge layer for Web3.**
+> ### Built for OneHack 3.0 | AI & GameFi Edition — AI Track
 
 ---
 
-### 🚨 The Problem
+## 📖 What is Wrap-Up?
 
-The Web3 information landscape is broken in three critical ways:
+Wrap-Up is a fully-fledged decentralized social platform engineered for the modern Web3 researcher, built as a tool to **"Study Smartly."**
 
-| Problem | Impact |
+Instead of drowning in messy Twitter feeds, scattered news articles, or reading multiple blogs, Wrap-Up delivers a **gamified, decentralized ecosystem** where high-quality articles and AI-generated research reports are curated, summarised, and permanently recorded on-chain via **OneChain**.
+
+---
+
+## 🚨 The Problem We Are Solving
+
+The Web3 information landscape is fundamentally broken in three critical ways:
+
+| # | Problem | Real-World Impact |
+|---|---|---|
+| 1 | **Information Overload** | Hundreds of articles, threads, and posts are published daily from multiple platforms with no quality checks. |
+| 2 | **Financial Bias** | Content is routinely created to pump tokens, mislead retail investors, or spread FUD. There is no accountability layer. |
+| 3 | **No Verifiable Source of Truth** | There is no on-chain, cryptographically-backed record of what content is accurate, who published it, or when it appeared. |
+
+These three failures together create an environment where **misinformation thrives and genuine research is undervalued.** The cost of this is measured in bad investment decisions, missed opportunities, and eroding trust in the space.
+
+---
+
+## ✅ The Solution: How Wrap-Up Fixes This
+
+Wrap-Up directly attacks all three failure points by combining **AI-powered research**, **articles curation**, and **immutable on-chain storage** — all running on the OneChain ecosystem.
+
+| Failure | Wrap-Up's Answer |
 |---|---|
-| **Information Overload** | Hundreds of articles, threads, and posts published daily with no quality filter |
-| **Financial Bias & Shilling** | Content is routinely published to pump tokens, mislead investors, or spread FUD |
-| **No Verifiable Source of Truth** | There is no on-chain, cryptographically backed record of what content is accurate |
+| Information Overload | AI synthesizes the web into structured, sourced research reports in seconds |
+| Financial Bias | Community upvoting and on-chain leaderboards surface quality content organically |
+| No Source of Truth | Every piece of content is committed to OneChain with a permanent IPFS hash and wallet fingerprint |
 
-Wrap-Up Evolved directly attacks all three by combining **AI-powered research synthesis**, **community-driven curation**, and **immutable on-chain storage** on the Polkadot ecosystem.
+Wrap-Up is the platform where:
 
----
-
-### ✅ The Solution
-
-Wrap-Up Evolved is the platform where:
-- **AI writes research** so you don't have to chase sources
+- **AI writes research** so you don't have to chase a hundred sources
 - **Communities curate** and rank what actually matters
-- **The blockchain records** what has been verified, forever
-- **Readers earn** for contributing high-quality knowledge
+- **The OneChain blockchain records** what has been verified, permanently
+- **Readers earn $WUP tokens** for contributing high-quality knowledge
 
 ---
 
-## 🌟 Core Features — In Full Detail
+## 💎 Why OneChain? The Move Architecture Advantage
 
-### 1. 🤖 AI Research Report Generator
+Building Wrap-Up on OneChain was not a deployment decision. It was a design decision. We fully abandoned the EVM account-based model and embraced **OneChain's Resource-Oriented Move Architecture**, which unlocked capabilities that are impossible on legacy chains.
 
-Users enter any research topic or question, and Wrap-Up's backend AI engine autonomously:
-
-- **Scours the live web** for the most relevant and recent sources
-- **Synthesizes a structured, high-quality research report** — complete with key findings, summaries, and source citations
-- **Uploads the compiled report to IPFS** via Pinata, producing a permanent, tamper-proof content hash
-- **Commits the IPFS hash on-chain** to the WrapUp smart contract on Polkadot Hub Testnet, creating an immutable publication record
-
-The result is a research report that is not just informative — it is **verifiably published on a decentralized, censorship-resistant network.** Every report gets its own on-chain fingerprint that anyone can independently verify.
-
-> **Use Case:** A user wants to understand the current state of Polkadot's parachain ecosystem. Instead of spending hours reading, they submit the prompt to Wrap-Up and receive a synthesized, sourced report in seconds — permanently stored and community-ranked.
+Here is exactly how we used OneChain's unique primitives:
 
 ---
 
-### 2. 📰 Article Curation & Leaderboard
+### 1. Object-Oriented User Profiles (The `UserProfile` Object)
 
-Any user can submit external article links to the platform. Wrap-Up's curation engine then:
+On EVM platforms, a user's points and state are stored inside a central contract mapping. This means the contract owns the user's data. We did the opposite.
 
-- **Fetches and extracts the full article content** for clean, distraction-free in-app reading (no more paywalls or ad-heavy pages)
-- **Displays the article** in a beautiful reader view with full formatting intact
-- **Records the submission on-chain**, anchoring it to the submitter's wallet address and timestamp
-- **Tracks community engagement** — upvotes, comments, and saves — aggregated into a **live curation leaderboard**
+When a user initializes their Wrap-Up account, our Move contract creates a `UserProfile` object with the `key` ability and **physically transfers it into the user's wallet**. The user is the true custodian of their own profile, points, and earned rewards. No central authority can revoke or manipulate this data.
 
-#### 🏆 The WUP Token Reward System
-Users who consistently submit high-quality articles that rise to the top of the leaderboard **earn WUP tokens** — the platform's native utility token. This creates a self-reinforcing incentive loop:
-
-```
-Submit quality content → Community upvotes → Climb leaderboard → Earn WUP rewards
+```move
+// Simplified representation of profile initialization
+public entry fun initialize_profile(ctx: &mut TxContext) {
+    let profile = UserProfile {
+        id: object::new(ctx),
+        points: 0,
+        claimed_rewards: 0,
+    };
+    transfer::transfer(profile, tx_context::sender(ctx));
+}
 ```
 
-This token model aligns community incentives with content quality, making spam and low-effort submissions economically irrational.
+**This is a fundamentally more secure and user-sovereign model than any EVM mapping can offer.**
 
 ---
 
-### 3. ⚖️ Article Comparator Tool
+### 2. Programmable Transaction Blocks (PTBs) for Seamless AI Report Submission
 
-One of Wrap-Up's most powerful productivity features is the built-in **Article Comparator** — a side-by-side reading and analysis tool that allows users to:
+Our React frontend uses `@mysten/dapp-kit` to construct Programmable Transaction Blocks. When a user submits an AI research report, the frontend bundles multiple operations atomically into a single transaction:
 
-- **Load any two articles or AI research reports** into a split-screen view simultaneously
-- **Highlight and compare** key claims, data points, and conclusions across sources
-- **Identify contradictions** between sources on the same topic — critical for spotting biased or misleading content
-- **Copy, annotate, and export** comparison sessions for further study or sharing
+- The user's `UserProfile` object reference (mutable, from their wallet)
+- The IPFS content hash of the synthesized report
+- OneChain's global `Clock` object (`0x6`) for a tamper-proof, block-level timestamp
 
-> **Use Case:** A researcher wants to compare a bullish vs. bearish analysis on a DeFi protocol. They load both into the comparator and immediately see where the arguments diverge — without switching tabs or losing context.
-
----
-
-### 4. 💬 Decentralized Social Hub (Reddit-Style Discussion Threads)
-
-Every article and research report on Wrap-Up is a living social object. Beneath each piece of content, users can:
-
-- **Post threaded comments** — full Reddit-style nested discussions that allow deep, contextual debate
-- **Upvote and downvote** both comments and articles, with scores reflecting genuine community sentiment
-- **Tag comments** as questions, corrections, or endorsements for better discussion navigation
-- **View the on-chain record** of all interactions, ensuring that engagement data cannot be silently deleted or manipulated by any central authority
-
-All social interactions are **permanently backed by the blockchain**, meaning discussion history is owned by the community — not by any company or server.
+This means a report submission, profile point update, and timestamp recording all happen atomically in one transaction. No second transaction, no race conditions, no partial state updates.
 
 ---
 
-### 5. 🪙 WUP Token Economy
+### 3. Secure Token Claiming via Object-Level State
 
-WUP is the native ERC-20 utility token that powers all economic activity on the platform:
+The `claim_rewards` function in our Move module reads the user's unspent points **directly from their owned `UserProfile` object** in their wallet. It does not query a central ledger. This design:
 
-| Action | Token Flow |
+- Prevents any centralized manipulation of claimable balances
+- Ensures only the wallet owner can trigger a claim
+- Makes the entire reward lifecycle auditable on-chain
+
+---
+
+### 4. Hybrid Off-Chain / On-Chain Architecture for Web2-Speed UX
+
+We combined an off-chain MongoDB database with on-chain Move settlement to create a Web2-like experience without sacrificing decentralization. AI generation and article reading happen instantly off-chain. The "Curation Submit" and "Token Claim" actions are then settled on OneChain, giving users speed where it matters and trust where it counts.
+
+---
+
+## 🌟 Core Features
+
+### Feature 1: 🤖 AI Research Engine
+
+> *The core feature powering the AI Track submission*
+
+#### The Problem It Solves
+A Web3 researcher today must read 15 articles, cross-reference 3 Twitter threads, and check 2 Discord servers just to form an informed view on a single topic. This process takes hours and is still vulnerable to bias.
+
+#### How It Works
+
+Users enter any research topic or question into Wrap-Up's research panel. The backend AI engine then executes a full research pipeline autonomously:
+
+**Step 1 — Web Intelligence Gathering**
+The engine scours live web sources for the most recent and relevant articles, posts, and documentation related to the query. It prioritizes primary sources and ecosystem-native publications.
+
+**Step 2 — Synthesis and Structuring**
+The AI synthesizes all gathered information into a structured, readable report featuring:
+- An executive summary of key findings
+- A detailed analysis section
+- Identified counterpoints or risks
+- Full source citations with links
+
+**Step 3 — IPFS Pinning for Permanent Storage**
+The compiled report is uploaded to IPFS via Pinata, producing a content-addressed, immutable hash. The report now exists permanently on a decentralized storage network.
+
+**Step 4 — On-Chain Commitment**
+The IPFS hash is submitted to the `platform` module on OneChain Testnet via a PTB. The transaction emits a `ReportSubmittedEvent`, linking the report's hash to the submitter's wallet address and block timestamp. The report now has a **cryptographic proof of existence on OneChain**.
+
+**Step 5 — Community Ranking**
+The published report enters the platform leaderboard where the community can upvote, comment, and compare it against other reports.
+
+#### Use Case
+> A user wants to understand the current state of OneChain's Move ecosystem. Instead of spending hours reading, they submit the prompt to Wrap-Up and receive a synthesized, sourced report in seconds — permanently stored and community-ranked on OneChain.
+
+---
+
+### Feature 2: 📰 Article Curation and Leaderboard
+
+#### The Problem It Solves
+Quality articles exist across the web, but the Web3 community has no shared, unbiased platform to surface and rank them. Twitter algo and Discord pin-boards are both easily gamed.
+
+#### How It Works
+
+Any user can submit an external article URL to the Wrap-Up curation feed. The platform then:
+
+**Article Extraction**
+Wrap-Up's backend fetches and parses the full article content, stripping away ads, paywalls, and distracting UI. The reader gets a clean, distraction-free reading experience inside the app.
+
+**On-Chain Submission Record**
+The article's URL, submitter wallet address, and submission timestamp are committed on-chain, creating an immutable record of who surfaced what content and when.
+
+**Community Engagement Tracking**
+The platform aggregates upvotes, comments, and saves on each article. These scores feed into a live curation leaderboard.
+
+**The $WUP Reward Loop**
+Users whose submitted articles rise to the top of the leaderboard earn points in their `UserProfile` object. Those points are claimable as $WUP tokens via the `claim_rewards` function.
+
+```
+Submit quality article → Community upvotes → Climb leaderboard → Earn $WUP rewards
+```
+
+This model makes spam and low-effort submissions economically irrational. Quality content is the only path to earning.
+
+---
+
+### Feature 3: ⚖️ Article Comparator Tool
+
+#### The Problem It Solves
+Two articles on the same topic can reach wildly different conclusions. Without a tool to place them side by side, readers are forced to context-switch between tabs and rely on memory to spot contradictions.
+
+#### How It Works
+
+The Article Comparator is a split-screen reading and analysis tool built into Wrap-Up:
+
+**Side-by-Side View**
+Users can load any two articles or AI research reports into a dual-pane view simultaneously. No more tab-switching.
+
+**Contradiction Detection**
+By reading both sources in parallel, users can immediately identify where claims diverge, where data conflicts, and where one source may be omitting important context.
+
+**Research Workflow**
+Users can highlight passages, annotate key points, and compare conclusions across sources in a single focused session.
+
+#### Use Case
+> A researcher wants to compare a bullish vs. bearish analysis on a DeFi protocol. They load both reports into the comparator and immediately see where the arguments diverge — without losing context.
+
+---
+
+### Feature 4: 💬 Decentralized Social Hub
+
+#### The Problem It Solves
+Existing Web3 discussion happens on centralized platforms. Valuable analysis threads can be deleted, shadowbanned, or lost. The community has no permanent, censorship-resistant record of its own discourse.
+
+#### How It Works
+
+Every article and research report on Wrap-Up is a living social object with its own discussion layer:
+
+**Threaded Discussions**
+Reddit-style nested comment threads allow deep, contextual debate on every piece of content.
+
+**Community Voting**
+Upvotes and downvotes on both comments and articles surface genuine community sentiment without algorithmic interference.
+
+**Immutable Interaction Records**
+All social interactions are backed by on-chain records. Discussion history is owned by the community, not by any company or server. No comment can be silently deleted by a central authority.
+
+---
+
+### Feature 5: 🪙 $WUP Token Economy and Claiming
+
+#### The Problem It Solves
+Most content platforms extract value from creators without returning it. Quality researchers and curators have no financial incentive to do their best work on platform.
+
+#### How It Works
+
+$WUP is the native utility token that powers all economic activity on Wrap-Up. The token lifecycle is built directly on Move objects:
+
+| Action | Result |
 |---|---|
-| Submit a top-ranked article | **Earn WUP** |
-| Generate a widely-read AI report | **Earn WUP** |
-| Claim rewards from the WUPClaimer contract | **Receive WUP** |
-| Future: Stake WUP to boost content visibility | **Spend WUP** |
+| Submit an AI research report | Earn points in your `UserProfile` object |
+| Submit a top-ranked curated article | Earn points in your `UserProfile` object |
+| Call `claim_rewards` on-chain | Points converted to $WUP in your wallet |
+| Future: Stake $WUP to boost content visibility | Spend $WUP |
 
-The WUPClaimer contract manages reward distribution in a transparent, auditable manner — users can verify every token emission directly on-chain.
+**The Claim Mechanics**
 
----
+The `claim_rewards` function in the `platform` Move module directly reads the `points` field of the caller's owned `UserProfile` object. It verifies unspent balance, calculates the $WUP equivalent, and settles the transfer — all in one atomic Move transaction. The user's `UserProfile` object is then updated to reflect the claimed amount.
 
-### 6. 🔒 On-Chain Content Provenance
-
-Every piece of content on Wrap-Up — whether AI-generated or user-curated — has a **cryptographic proof of existence** stored on the Polkadot Hub Testnet. This means:
-
-- **Who published it** (wallet address)
-- **When it was published** (block timestamp)
-- **What the content is** (IPFS hash — immutable reference to the full text)
-
-This is the foundation of **verifiable knowledge on Web3** — content that cannot be retroactively altered, censored, or disappeared.
+This means every reward claim is:
+- Initiated only by the wallet owner
+- Settled atomically on OneChain
+- Fully auditable by anyone
 
 ---
 
-## 🏗️ Architecture & Technical Workflow
-
-Wrap-Up bridges Web2 AI capabilities with Web3 infrastructure through a clean, modular pipeline:
+## 🏗️ Full Architecture Diagram
 
 ```
-User Action
-    │
-    ▼
-React Frontend (Wagmi + Vite)
-    │  User submits article URL or research prompt
-    ▼
+User Action (Research Prompt or Article URL)
+          │
+          ▼
+React Frontend (@mysten/dapp-kit, Zustand, React Query)
+          │  Constructs PTB with UserProfile Object + Clock (0x6)
+          ▼
 Node.js / Express Backend
-    │  AI synthesizes report or extracts article content
-    ▼
-IPFS (via Pinata)
-    │  Full content uploaded → IPFS Hash returned
-    ▼
-Polkadot Hub Testnet (Smart Contracts via Wagmi)
-    │  IPFS Hash + metadata committed on-chain
-    ▼
-Frontend Polling (useReadContract)
-    │  UI reads on-chain data in real time
-    ▼
-User sees verified, on-chain content card
-```
-
-### Data Flow for AI Research Reports
-
-```
-1. User inputs research prompt
-2. Backend AI agent queries live web sources
-3. AI synthesizes structured report with citations
-4. Report uploaded to IPFS → hash returned
-5. Hash submitted to WrapUp.sol on Polkadot Hub Testnet
-6. Frontend displays report with on-chain publication badge
-7. Community upvotes, comments, and ranks the report
-8. High-quality report submitter earns WUP tokens
+          │  AI pipeline synthesizes report or extracts article
+          ▼
+IPFS via Pinata
+          │  Full content pinned → IPFS hash returned
+          ▼
+OneChain Testnet (Move :: platform module)
+          │  Hash + metadata committed on-chain atomically
+          │  ReportSubmittedEvent emitted
+          ▼
+Frontend Query (React Query polling)
+          │  UI reads verified on-chain content state
+          ▼
+User sees verified, on-chain content card with community ranking
 ```
 
 ---
@@ -176,165 +276,118 @@ User sees verified, on-chain content card
 
 | Layer | Technology |
 |---|---|
-| **Smart Contracts** | Solidity, Foundry |
-| **Blockchain** | Polkadot Hub Testnet |
+| **Smart Contracts** | Move (OneChain / Sui Framework) |
+| **Blockchain** | OneChain Testnet |
 | **Frontend** | React, Vite, TailwindCSS |
-| **State Management** | Zustand |
-| **Blockchain Interaction** | Wagmi, Viem |
+| **State Management** | Zustand, React Query |
+| **Blockchain Interaction** | `@mysten/dapp-kit`, `@mysten/sui` |
 | **Decentralized Storage** | IPFS via Pinata |
-| **Backend** | Node.js, Express |
+| **Backend** | Node.js, Express, Prisma (MongoDB) |
 | **AI Engine** | Web-scraping + LLM synthesis pipeline |
-| **Wallet Support** | MetaMask, WalletConnect (EVM-compatible) |
+| **Wallet Support** | OneWallet (OneChain native) |
 
 ---
 
-## 🔴 Polkadot Integration
+## ✅ Deployed Contracts — OneChain Testnet
 
-Wrap-Up Evolved is deployed on the **Polkadot Hub Testnet**, leveraging Polkadot's EVM-compatible infrastructure to deliver:
+Our Move smart contracts are actively deployed and functional on the OneChain Testnet.
 
-- **Fast, low-cost transactions** — ideal for high-frequency social interactions like upvotes and comment submissions
-- **EVM Compatibility** — full support for Solidity smart contracts, enabling seamless developer experience with Foundry and Wagmi
-- **Ecosystem alignment** — built within the broader Polkadot ecosystem, positioning Wrap-Up to expand across parachains as the platform scales
-
-### ✅ Deployed Contracts — Polkadot Hub Testnet
-
-| Contract | Address |
+| Field | Value |
 |---|---|
-| **WrapUp Core** | `0xcd04001daE47548e3e28E847cF2669752acDC57A` |
-| **WUP Token** | `0x067A590CBc7610d5Ef00A9d5cE2d12889C0Ae31b` |
-| **WUP Claimer** | `0x012b50D023E4157D10f5562a8dD01D55e145B0a2` |
-
-### Smart Contract Architecture
-
-#### `WrapUp.sol` — Core Contract
-- Stores IPFS hashes for all curated articles and AI research reports
-- Tracks upvote counts and community engagement scores per content item
-- Maps content to submitter wallet addresses for reward attribution
-- Emits events consumed by the frontend for real-time UI updates
-
-#### `WUPToken.sol` — ERC-20 Utility Token
-- Standard ERC-20 implementation with minting controlled by the WUPClaimer contract
-- Tracks balances across all platform participants
-- Enables future governance and staking features
-
-#### `WUPClaimer.sol` — Reward Distribution
-- Manages the calculation and distribution of WUP token rewards to top content contributors
-- Implements leaderboard-based claim logic — only addresses ranked above a threshold are eligible
-- Fully transparent: every reward emission is verifiable on-chain
-
----
-
-## 🗂️ Repository Structure
-
-```
-wrap-up-evolved/
-├── contracts/
-│   ├── src/
-│   │   ├── WrapUp.sol          # Core content registry & upvote logic
-│   │   ├── WUPToken.sol        # ERC-20 utility token
-│   │   └── WUPClaimer.sol      # Reward distribution contract
-│   └── foundry.toml
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── ArticleCard.jsx      # Displays on-chain article data
-│   │   │   ├── ResearchReport.jsx   # AI report viewer
-│   │   │   ├── Comparator.jsx       # Side-by-side article tool
-│   │   │   └── DiscussionThread.jsx # Reddit-style comments
-│   │   ├── pages/
-│   │   └── store/                   # Zustand state management
-│   ├── vite.config.js
-│   └── tailwind.config.js
-├── backend/
-│   ├── routes/
-│   │   ├── research.js         # AI report generation endpoint
-│   │   └── articles.js         # Article fetch & extraction endpoint
-│   └── server.js
-└── README.md
-```
+| **Package ID** | `0x6211ae71e382c6b59457a66579d5345ed82f2d746c3848932ee2e2bef8fd3dbd` |
+| **Module Name** | `platform` |
+| **Global Clock Object** | `0x6` (Standard across all Sui-based chains — used for report timestamps) |
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js v18+
-- Foundry (for contract compilation & deployment)
-- A Web3 wallet (MetaMask recommended) connected to **Polkadot Hub Testnet**
+- OneChain CLI (for Move contract compilation)
+- OneWallet Browser Extension (connected to OneChain Testnet)
 - Pinata API key (for IPFS uploads)
 
 ### 1. Clone the Repository
+
 ```bash
-git clone https://github.com/your-username/wrap-up-evolved.git
-cd wrap-up-evolved
+git clone https://github.com/iammohit64/wrap-up-onechain.git
+cd wrap-up-onechain
 ```
 
-### 2. Install Frontend Dependencies
+### 2. Install Dependencies
+
 ```bash
+# Install frontend dependencies
 cd frontend
+npm install
+
+# Install backend dependencies
+cd ../backend
 npm install
 ```
 
 ### 3. Configure Environment Variables
-```bash
-# frontend/.env
-VITE_WRAPUP_CONTRACT=0xcd04001daE47548e3e28E847cF2669752acDC57A
-VITE_WUP_TOKEN=0x067A590CBc7610d5Ef00A9d5cE2d12889C0Ae31b
-VITE_WUP_CLAIMER=0x012b50D023E4157D10f5562a8dD01D55e145B0a2
-VITE_CHAIN_ID=<Polkadot Hub Testnet Chain ID>
 
-# backend/.env
+Create `.env` files in both the `frontend` and `backend` directories.
+
+**frontend/.env**
+```env
+VITE_PACKAGE_ID=0x6211ae71e382c6b59457a66579d5345ed82f2d746c3848932ee2e2bef8fd3dbd
+```
+
+**backend/.env**
+```env
 PINATA_API_KEY=your_pinata_key
 PINATA_SECRET=your_pinata_secret
 AI_API_KEY=your_ai_key
+DATABASE_URL=your_mongodb_url
 ```
 
-### 4. Run the Backend
+### 4. Run the Application
+
+Open two terminal windows.
+
+**Terminal 1 — Backend:**
 ```bash
 cd backend
-npm install
 npm run dev
 ```
 
-### 5. Run the Frontend
+**Terminal 2 — Frontend:**
 ```bash
 cd frontend
 npm run dev
 ```
 
-### 6. Compile & Deploy Contracts (Optional)
-```bash
-cd contracts
-forge build
-forge script script/Deploy.s.sol --rpc-url <polkadot_hub_testnet_rpc> --broadcast
-```
-
 ---
 
-## 🎯 What Makes This a Winning Project
+## 🎯 Why Wrap-Up Wins the AI Track
 
-| Dimension | Wrap-Up Evolved |
+| Dimension | What We Delivered |
 |---|---|
-| **Real Problem** | Web3 information overload and misinformation are unsolved, billion-dollar problems |
-| **Full-Stack Completeness** | Working frontend, backend, smart contracts, IPFS storage — all integrated end-to-end |
-| **Genuine Decentralization** | Content provenance and social data backed by the blockchain, not a database |
-| **Token Economic Design** | Incentives aligned so good content is financially rational to produce |
-| **Polkadot Native** | EVM-compatible contracts deployed and verified on Polkadot Hub Testnet |
-| **UX-First** | Research tools, comparator, and reader view built for real daily utility |
-| **Live & Accessible** | Fully deployed and demo-able at wrap-up-evolved.vercel.app |
+| **Meaningful AI Integration** | AI is not a buzzword here. It solves a genuine Web3 problem — information overload — by synthesizing complex multi-source data into structured, readable, citable reports. |
+| **Deep OneChain Ecosystem Alignment** | We fully embraced the Move paradigm: object-owned user profiles, PTBs for atomic transactions, and the global Clock object for tamper-proof timestamps. |
+| **Working MVP** | We shipped a fully functional product featuring live IPFS pinning, OneWallet transaction signing, on-chain event emission, and a polished, production-grade UI. |
+| **Real Problem, Real Stakes** | Web3 misinformation and information overload are active, multi-billion-dollar problems. Every feature in Wrap-Up exists to address a specific, observable failure in how knowledge flows through the ecosystem. |
+| **Token Economy with On-Chain Logic** | The $WUP reward loop is not simulated. It is settled by Move functions reading directly from user-owned objects in their wallets. |
 
 ---
 
 ## 🔮 Roadmap
 
-- [ ] **Governance Module** — WUP holders vote on curation policies and platform parameters
-- [ ] **Parachain Expansion** — Deploy across additional Polkadot parachains for cross-chain content discovery
-- [ ] **Mobile App** — React Native client for on-the-go research
-- [ ] **Reputation System** — NFT-based reputation badges for top curators
-- [ ] **DAO Treasury** — Protocol fees fund community grants for high-quality research
+- [ ] **Governance Module** — $WUP holders vote on curation policies and platform parameters
+- [ ] **Cross-Chain Content Discovery** — Expand to additional Move-based chains as the ecosystem grows
+- [ ] **Mobile Client** — React Native app for on-the-go research and curation
+- [ ] **Reputation NFTs** — Soulbound badges for top curators, verifiable on-chain
+- [ ] **DAO Treasury** — Protocol fees fund community grants for high-quality research initiatives
 
 ---
 
 ## 👥 Team
 
-Built with ❤️ for the Polkadot Ecosystem.
+Built with dedication for **OneHack 3.0 | AI & GameFi Edition.**
+
+[![iammohit64](https://img.shields.io/badge/iammohit64-181717?style=flat-square&logo=github)](https://github.com/iammohit64)
+[![dakshh0827](https://img.shields.io/badge/dakshh0827-181717?style=flat-square&logo=github)](https://github.com/dakshh0827)

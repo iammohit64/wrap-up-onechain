@@ -4,7 +4,7 @@
 
 [![Live App](https://img.shields.io/badge/Visit-Live%20App-00C853?style=for-the-badge&logo=vercel&logoColor=white)](https://wrap-up-onechain.vercel.app/)
 [![Demo Video](https://img.shields.io/badge/Watch-Demo%20Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/PEnP38zMSzw)
-[![OneChain Docs](https://img.shields.io/badge/Docs-OneChain-6C47FF?style=for-the-badge)](https://docs.onelabs.cc/)
+[![OneChain Docs](https://img.shields.io/badge/Docs-OneChain-6C47FF?style=for-the-badge)](https://docs.onelabs.cc/DevelopmentDocument)
 
 > ### Built for OneHack 3.0 | AI & GameFi Edition — AI Track
 

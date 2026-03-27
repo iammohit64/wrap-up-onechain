@@ -12,12 +12,14 @@ import '@mysten/dapp-kit/dist/index.css'
 
 const queryClient = new QueryClient()
 
-// ✅ FIX: Use OneChain's official RPC endpoint instead of Sui's!
+// Change your networks constant in main.jsx to this:
+const rpcUrl = window.location.hostname === 'localhost' 
+  ? 'https://rpc-testnet.onelabs.cc/' 
+  : '/onechain-rpc'; // <--- Uses Vercel proxy in production to bypass CORS
+
 const networks = {
-  testnet: {
-    url: 'https://rpc-testnet.onelabs.cc:443',
-  },
-}
+  testnet: { url: rpcUrl },
+};
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

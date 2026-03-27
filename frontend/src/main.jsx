@@ -12,10 +12,10 @@ import '@mysten/dapp-kit/dist/index.css'
 
 const queryClient = new QueryClient()
 
-// ✅ FIX: Use direct fullnode URL instead of getFullnodeUrl
+// ✅ FIX: Use OneChain's official RPC endpoint instead of Sui's!
 const networks = {
   testnet: {
-    url: 'https://fullnode.testnet.sui.io',
+    url: 'https://rpc-testnet.onelabs.cc:443',
   },
 }
 

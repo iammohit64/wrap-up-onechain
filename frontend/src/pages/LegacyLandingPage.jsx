@@ -68,11 +68,13 @@ export default function LegacyLandingPage() {
     if (!account) { toast.error("Connect OneWallet to curate"); return; }
 
     setLoading(true); setError(null); setTxDone(false);
+    
+    // FIX: Declare dbArticle at the top level so the entire function (and catch block) can access it immediately
+    let dbArticle = null; 
 
     try {
       // STEP 0: Save to DB
       setStepIndex(0);
-      let dbArticle;
       try {
         const res = await axios.post(`${API_BASE}/articles/prepare`, {
           title: scrapedPreview.title, summary: scrapedPreview.summary,
@@ -86,7 +88,8 @@ export default function LegacyLandingPage() {
         setSavedArticle(dbArticle);
       } catch (err) {
         if (err.response?.data?.article) {
-          dbArticle = err.response.data.article; setSavedArticle(dbArticle);
+          dbArticle = err.response.data.article; 
+          setSavedArticle(dbArticle);
         } else throw new Error(err.response?.data?.error || "DB save failed");
       }
 
@@ -146,7 +149,8 @@ export default function LegacyLandingPage() {
 
       // STEP 3: Sync On-Chain ID to DB
       if (onChainId && account.address) {
-        await markArticleOnChainDB(savedArticle.articleUrl, onChainId, account.address, generatedHash);
+        // FIX: Using dbArticle.articleUrl instead of savedArticle.articleUrl
+        await markArticleOnChainDB(dbArticle.articleUrl, onChainId, account.address, generatedHash);
       }
 
       setStepIndex(3); 
@@ -159,7 +163,12 @@ export default function LegacyLandingPage() {
       console.error(err);
       setError(err.message); 
       toast.error(err.message || "Curation failed", { id: "mintToast" });
-      if (savedArticle?.id) { deleteArticleFromDB(savedArticle.id); setSavedArticle(null); }
+      
+      // FIX: Using dbArticle instead of savedArticle here as well
+      if (dbArticle?.id) { 
+        deleteArticleFromDB(dbArticle.id); 
+        setSavedArticle(null); 
+      }
       setStepIndex(-1); 
       setLoading(false);
     }
